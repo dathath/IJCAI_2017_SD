@@ -59,7 +59,7 @@ $./configure_tmp.sh
 
 $cd bin
 
-$java Naum <filename> 0 1 1 (or 0) 0 0 
+$java Naum <filename> 0 1 1(or 0) 0 0 
 
 
 -naum takes as input the filename followed by a sequence of 5 0/1s. Eg. 0 1 1 0 0.
@@ -68,7 +68,8 @@ to checking for sat and the middle bit corresponds to whether the constraints mu
 direction or the abstraction based approach must be employed. The last 2 digits are not functional since 
 much of the functionality in 'naum' has been removed for the code in this repository. 
 
+-For the other benchmarks, adjust the parameters as indicated in the paper.
+
 Since all the 'hong' examples are unsat, usage is restricted 
 to 1 0 1/0 0 0. For the Dubins Car Benchmarks, this is restricted to 0 1 1/0 0 0.
 
--For the other benchmarks, adjust the parameters as indicated in the paper.
