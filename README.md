@@ -11,8 +11,11 @@ Dependencies:
 --numpy
 
 *Proteus
+
 *dReal
+
 *z3
+
 *timeout3 -- Can be found @ https://github.com/jbenet/bash-timeout3
 
 Benchmarks and Corresponding Code:
@@ -36,17 +39,26 @@ Setup & Usage:
 -Import proteus into an IDE (eg. eclipse) and edit dRealInterface.java 
 from dl.logicsolvers.drealkit as follows:
 
-Replace "/home/sumanth/timeout3-v2" with "<path>/timeout3-v2" 
+Replace 
+"/home/sumanth/timeout3-v2" 
+with "<path>/timeout3-v2" 
 where <path> is the path to the binary 
 corresponding to timeout3-v2.
 
 -Running the FPGA encoder expression benchmarks
+
 $cd ./naum_philips
+
 $chmod +x configure_tmp.sh
+
 $chmod +x configure.sh
+
 $./configure.sh
+
 $./configure_tmp.sh
+
 $cd bin
+
 $java Naum <filename> 0 1 1 (or 0) 0 0 
 
 
