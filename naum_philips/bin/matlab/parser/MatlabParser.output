@@ -1,0 +1,1702 @@
+Terminals unused in grammar
+
+   SPACE
+   TRUE
+   FALSE
+
+
+Grammar
+
+    0 $accept: input $end
+
+    1 input: matlabprogram
+
+    2 matlabprogram: assignment
+    3              | conditional
+    4              | matrixassignment
+    5              | matlabprogram assignment
+    6              | matlabprogram conditional
+    7              | matlabprogram matrixassignment
+
+    8 conditional: IF logicalformula matlabprogram END
+    9            | IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | IF logicalformula matlabprogram elselist END
+   11            | IF logicalformula matlabprogram elselist ELSE matlabprogram END
+
+   12 elselist: ELSEIF logicalformula matlabprogram
+   13         | elselist ELSEIF logicalformula matlabprogram
+
+   14 matrixassignment: IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | IDENTIFIER ASSIGN matrix SEMICOLON
+
+   16 assignment: IDENTIFIER ASSIGN term SEMICOLON
+
+   17 logicalformula: comparison
+   18               | LPAREN logicalformula RPAREN
+   19               | logicalformula AND logicalformula
+   20               | logicalformula OR logicalformula
+   21               | NOT logicalformula
+
+   22 comparison: term INEQUALITY term
+   23           | term EQUALS term
+
+   24 term: NUMBER
+   25     | IDENTIFIER LPAREN argumentlist RPAREN
+   26     | IDENTIFIER
+   27     | LPAREN term RPAREN
+   28     | term PLUS term
+   29     | term MINUS term
+   30     | term MULTIPLY term
+   31     | term DIVIDE term
+   32     | term POWER term
+   33     | MINUS term
+
+   34 argumentlist: %empty
+   35             | term
+   36             | argumentlist COMMA term
+
+   37 matrix: LEFTBRACKET rowlist RIGHTBRACKET
+
+   38 matrix3D: LEFTBRACKET matrixlist RIGHTBRACKET
+
+   39 matrixlist: rowlist SEMICOLON EMPTYLINE rowlist
+   40           | rowlist SEMICOLON EMPTYLINE matrixlist
+
+   41 rowlist: row
+   42        | rowlist SEMICOLON row
+
+   43 row: term
+   44    | row COMMA term
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+NUMBER (258) 24
+IDENTIFIER (259) 14 15 16 25 26
+PLUS (260) 28
+MINUS (261) 29 33
+MULTIPLY (262) 30
+DIVIDE (263) 31
+POWER (264) 32
+INEQUALITY (265) 22
+EQUALS (266) 23
+LPAREN (267) 18 25 27
+RPAREN (268) 18 25 27
+SEMICOLON (269) 14 15 16 39 40 42
+COMMA (270) 36 44
+LEFTBRACKET (271) 37 38
+RIGHTBRACKET (272) 37 38
+SPACE (273)
+EMPTYLINE (274) 39 40
+AND (275) 19
+OR (276) 20
+NOT (277) 21
+TRUE (278)
+FALSE (279)
+ELSEIF (280) 12 13
+END (281) 8 9 10 11
+ASSIGN (282) 14 15 16
+NEGATIVE (283)
+ELSE (284) 9 11
+IF (285) 8 9 10 11
+
+
+Nonterminals, with rules where they appear
+
+$accept (31)
+    on left: 0
+input (32)
+    on left: 1, on right: 0
+matlabprogram (33)
+    on left: 2 3 4 5 6 7, on right: 1 5 6 7 8 9 10 11 12 13
+conditional (34)
+    on left: 8 9 10 11, on right: 3 6
+elselist (35)
+    on left: 12 13, on right: 10 11 13
+matrixassignment (36)
+    on left: 14 15, on right: 4 7
+assignment (37)
+    on left: 16, on right: 2 5
+logicalformula (38)
+    on left: 17 18 19 20 21, on right: 8 9 10 11 12 13 18 19 20 21
+comparison (39)
+    on left: 22 23, on right: 17
+term (40)
+    on left: 24 25 26 27 28 29 30 31 32 33, on right: 16 22 23 27 28
+    29 30 31 32 33 35 36 43 44
+argumentlist (41)
+    on left: 34 35 36, on right: 25 36
+matrix (42)
+    on left: 37, on right: 15
+matrix3D (43)
+    on left: 38, on right: 14
+matrixlist (44)
+    on left: 39 40, on right: 38 40
+rowlist (45)
+    on left: 41 42, on right: 37 39 40 42
+row (46)
+    on left: 43 44, on right: 41 42 44
+
+
+State 0
+
+    0 $accept: . input $end
+    1 input: . matlabprogram
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    input             go to state 3
+    matlabprogram     go to state 4
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 1
+
+   14 matrixassignment: IDENTIFIER . ASSIGN matrix3D SEMICOLON
+   15                 | IDENTIFIER . ASSIGN matrix SEMICOLON
+   16 assignment: IDENTIFIER . ASSIGN term SEMICOLON
+
+    ASSIGN  shift, and go to state 8
+
+
+State 2
+
+    8 conditional: IF . logicalformula matlabprogram END
+    9            | IF . logicalformula matlabprogram ELSE matlabprogram END
+   10            | IF . logicalformula matlabprogram elselist END
+   11            | IF . logicalformula matlabprogram elselist ELSE matlabprogram END
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 14
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 3
+
+    0 $accept: input . $end
+
+    $end  shift, and go to state 17
+
+
+State 4
+
+    1 input: matlabprogram .  [$end]
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    $default  reduce using rule 1 (input)
+
+    conditional       go to state 18
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 5
+
+    3 matlabprogram: conditional .
+
+    $default  reduce using rule 3 (matlabprogram)
+
+
+State 6
+
+    4 matlabprogram: matrixassignment .
+
+    $default  reduce using rule 4 (matlabprogram)
+
+
+State 7
+
+    2 matlabprogram: assignment .
+
+    $default  reduce using rule 2 (matlabprogram)
+
+
+State 8
+
+   14 matrixassignment: IDENTIFIER ASSIGN . matrix3D SEMICOLON
+   15                 | IDENTIFIER ASSIGN . matrix SEMICOLON
+   16 assignment: IDENTIFIER ASSIGN . term SEMICOLON
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   37 matrix: . LEFTBRACKET rowlist RIGHTBRACKET
+   38 matrix3D: . LEFTBRACKET matrixlist RIGHTBRACKET
+
+    NUMBER       shift, and go to state 9
+    IDENTIFIER   shift, and go to state 10
+    MINUS        shift, and go to state 11
+    LPAREN       shift, and go to state 21
+    LEFTBRACKET  shift, and go to state 22
+
+    term      go to state 23
+    matrix    go to state 24
+    matrix3D  go to state 25
+
+
+State 9
+
+   24 term: NUMBER .
+
+    $default  reduce using rule 24 (term)
+
+
+State 10
+
+   25 term: IDENTIFIER . LPAREN argumentlist RPAREN
+   26     | IDENTIFIER .  [IDENTIFIER, PLUS, MINUS, MULTIPLY, DIVIDE, POWER, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+
+    LPAREN  shift, and go to state 26
+
+    $default  reduce using rule 26 (term)
+
+
+State 11
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   33     | MINUS . term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 27
+
+
+State 12
+
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   18               | LPAREN . logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   27     | LPAREN . term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 28
+    comparison      go to state 15
+    term            go to state 29
+
+
+State 13
+
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   21               | NOT . logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 30
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 14
+
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    8            | IF logicalformula . matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+    9            | IF logicalformula . matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   10            | IF logicalformula . matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   11            | IF logicalformula . matlabprogram elselist ELSE matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+   19 logicalformula: logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+
+    IDENTIFIER  shift, and go to state 1
+    AND         shift, and go to state 31
+    OR          shift, and go to state 32
+    IF          shift, and go to state 2
+
+    matlabprogram     go to state 33
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 15
+
+   17 logicalformula: comparison .
+
+    $default  reduce using rule 17 (logicalformula)
+
+
+State 16
+
+   22 comparison: term . INEQUALITY term
+   23           | term . EQUALS term
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS        shift, and go to state 34
+    MINUS       shift, and go to state 35
+    MULTIPLY    shift, and go to state 36
+    DIVIDE      shift, and go to state 37
+    POWER       shift, and go to state 38
+    INEQUALITY  shift, and go to state 39
+    EQUALS      shift, and go to state 40
+
+
+State 17
+
+    0 $accept: input $end .
+
+    $default  accept
+
+
+State 18
+
+    6 matlabprogram: matlabprogram conditional .
+
+    $default  reduce using rule 6 (matlabprogram)
+
+
+State 19
+
+    7 matlabprogram: matlabprogram matrixassignment .
+
+    $default  reduce using rule 7 (matlabprogram)
+
+
+State 20
+
+    5 matlabprogram: matlabprogram assignment .
+
+    $default  reduce using rule 5 (matlabprogram)
+
+
+State 21
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   27     | LPAREN . term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 41
+
+
+State 22
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   37 matrix: LEFTBRACKET . rowlist RIGHTBRACKET
+   38 matrix3D: LEFTBRACKET . matrixlist RIGHTBRACKET
+   39 matrixlist: . rowlist SEMICOLON EMPTYLINE rowlist
+   40           | . rowlist SEMICOLON EMPTYLINE matrixlist
+   41 rowlist: . row
+   42        | . rowlist SEMICOLON row
+   43 row: . term
+   44    | . row COMMA term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term        go to state 42
+    matrixlist  go to state 43
+    rowlist     go to state 44
+    row         go to state 45
+
+
+State 23
+
+   16 assignment: IDENTIFIER ASSIGN term . SEMICOLON
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS       shift, and go to state 34
+    MINUS      shift, and go to state 35
+    MULTIPLY   shift, and go to state 36
+    DIVIDE     shift, and go to state 37
+    POWER      shift, and go to state 38
+    SEMICOLON  shift, and go to state 46
+
+
+State 24
+
+   15 matrixassignment: IDENTIFIER ASSIGN matrix . SEMICOLON
+
+    SEMICOLON  shift, and go to state 47
+
+
+State 25
+
+   14 matrixassignment: IDENTIFIER ASSIGN matrix3D . SEMICOLON
+
+    SEMICOLON  shift, and go to state 48
+
+
+State 26
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   25     | IDENTIFIER LPAREN . argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   34 argumentlist: . %empty  [RPAREN, COMMA]
+   35             | . term
+   36             | . argumentlist COMMA term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    $default  reduce using rule 34 (argumentlist)
+
+    term          go to state 49
+    argumentlist  go to state 50
+
+
+State 27
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   33     | MINUS term .  [IDENTIFIER, PLUS, MINUS, MULTIPLY, DIVIDE, POWER, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+
+    $default  reduce using rule 33 (term)
+
+    Conflict between rule 33 and token PLUS resolved as reduce (PLUS < NEGATIVE).
+    Conflict between rule 33 and token MINUS resolved as reduce (MINUS < NEGATIVE).
+    Conflict between rule 33 and token MULTIPLY resolved as reduce (MULTIPLY < NEGATIVE).
+    Conflict between rule 33 and token DIVIDE resolved as reduce (DIVIDE < NEGATIVE).
+    Conflict between rule 33 and token POWER resolved as reduce (POWER < NEGATIVE).
+
+
+State 28
+
+   18 logicalformula: LPAREN logicalformula . RPAREN
+   19               | logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+
+    RPAREN  shift, and go to state 51
+    AND     shift, and go to state 31
+    OR      shift, and go to state 32
+
+
+State 29
+
+   22 comparison: term . INEQUALITY term
+   23           | term . EQUALS term
+   27 term: LPAREN term . RPAREN
+   28     | term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS        shift, and go to state 34
+    MINUS       shift, and go to state 35
+    MULTIPLY    shift, and go to state 36
+    DIVIDE      shift, and go to state 37
+    POWER       shift, and go to state 38
+    INEQUALITY  shift, and go to state 39
+    EQUALS      shift, and go to state 40
+    RPAREN      shift, and go to state 52
+
+
+State 30
+
+   19 logicalformula: logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+   21               | NOT logicalformula .  [IDENTIFIER, RPAREN, AND, OR, IF]
+
+    $default  reduce using rule 21 (logicalformula)
+
+    Conflict between rule 21 and token AND resolved as reduce (AND < NOT).
+    Conflict between rule 21 and token OR resolved as reduce (OR < NOT).
+
+
+State 31
+
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   19               | logicalformula AND . logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 53
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 32
+
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   20               | logicalformula OR . logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 54
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 33
+
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    8            | IF logicalformula matlabprogram . END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+    9            | IF logicalformula matlabprogram . ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   10            | IF logicalformula matlabprogram . elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   11            | IF logicalformula matlabprogram . elselist ELSE matlabprogram END
+   12 elselist: . ELSEIF logicalformula matlabprogram
+   13         | . elselist ELSEIF logicalformula matlabprogram
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    ELSEIF      shift, and go to state 55
+    END         shift, and go to state 56
+    ELSE        shift, and go to state 57
+    IF          shift, and go to state 2
+
+    conditional       go to state 18
+    elselist          go to state 58
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 34
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   28     | term PLUS . term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 59
+
+
+State 35
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   29     | term MINUS . term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 60
+
+
+State 36
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   30     | term MULTIPLY . term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 61
+
+
+State 37
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   31     | term DIVIDE . term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 62
+
+
+State 38
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   32     | term POWER . term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 63
+
+
+State 39
+
+   22 comparison: term INEQUALITY . term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 64
+
+
+State 40
+
+   23 comparison: term EQUALS . term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 65
+
+
+State 41
+
+   27 term: LPAREN term . RPAREN
+   28     | term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+    RPAREN    shift, and go to state 52
+
+
+State 42
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   43 row: term .  [SEMICOLON, COMMA, RIGHTBRACKET]
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 43 (row)
+
+
+State 43
+
+   38 matrix3D: LEFTBRACKET matrixlist . RIGHTBRACKET
+
+    RIGHTBRACKET  shift, and go to state 66
+
+
+State 44
+
+   37 matrix: LEFTBRACKET rowlist . RIGHTBRACKET
+   39 matrixlist: rowlist . SEMICOLON EMPTYLINE rowlist
+   40           | rowlist . SEMICOLON EMPTYLINE matrixlist
+   42 rowlist: rowlist . SEMICOLON row
+
+    SEMICOLON     shift, and go to state 67
+    RIGHTBRACKET  shift, and go to state 68
+
+
+State 45
+
+   41 rowlist: row .  [SEMICOLON, RIGHTBRACKET]
+   44 row: row . COMMA term
+
+    COMMA  shift, and go to state 69
+
+    $default  reduce using rule 41 (rowlist)
+
+
+State 46
+
+   16 assignment: IDENTIFIER ASSIGN term SEMICOLON .
+
+    $default  reduce using rule 16 (assignment)
+
+
+State 47
+
+   15 matrixassignment: IDENTIFIER ASSIGN matrix SEMICOLON .
+
+    $default  reduce using rule 15 (matrixassignment)
+
+
+State 48
+
+   14 matrixassignment: IDENTIFIER ASSIGN matrix3D SEMICOLON .
+
+    $default  reduce using rule 14 (matrixassignment)
+
+
+State 49
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   35 argumentlist: term .  [RPAREN, COMMA]
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 35 (argumentlist)
+
+
+State 50
+
+   25 term: IDENTIFIER LPAREN argumentlist . RPAREN
+   36 argumentlist: argumentlist . COMMA term
+
+    RPAREN  shift, and go to state 70
+    COMMA   shift, and go to state 71
+
+
+State 51
+
+   18 logicalformula: LPAREN logicalformula RPAREN .
+
+    $default  reduce using rule 18 (logicalformula)
+
+
+State 52
+
+   27 term: LPAREN term RPAREN .
+
+    $default  reduce using rule 27 (term)
+
+
+State 53
+
+   19 logicalformula: logicalformula . AND logicalformula
+   19               | logicalformula AND logicalformula .  [IDENTIFIER, RPAREN, IF]
+   20               | logicalformula . OR logicalformula
+
+    AND  shift, and go to state 31
+    OR   shift, and go to state 32
+
+    $default  reduce using rule 19 (logicalformula)
+
+    Conflict between rule 19 and token AND resolved as shift (%right AND).
+    Conflict between rule 19 and token OR resolved as shift (%right OR).
+
+
+State 54
+
+   19 logicalformula: logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+   20               | logicalformula OR logicalformula .  [IDENTIFIER, RPAREN, IF]
+
+    AND  shift, and go to state 31
+    OR   shift, and go to state 32
+
+    $default  reduce using rule 20 (logicalformula)
+
+    Conflict between rule 20 and token AND resolved as shift (%right AND).
+    Conflict between rule 20 and token OR resolved as shift (%right OR).
+
+
+State 55
+
+   12 elselist: ELSEIF . logicalformula matlabprogram
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 72
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 56
+
+    8 conditional: IF logicalformula matlabprogram END .
+
+    $default  reduce using rule 8 (conditional)
+
+
+State 57
+
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+    9            | IF logicalformula matlabprogram ELSE . matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    matlabprogram     go to state 73
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 58
+
+   10 conditional: IF logicalformula matlabprogram elselist . END
+   11            | IF logicalformula matlabprogram elselist . ELSE matlabprogram END
+   13 elselist: elselist . ELSEIF logicalformula matlabprogram
+
+    ELSEIF  shift, and go to state 74
+    END     shift, and go to state 75
+    ELSE    shift, and go to state 76
+
+
+State 59
+
+   28 term: term . PLUS term
+   28     | term PLUS term .  [IDENTIFIER, PLUS, MINUS, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 28 (term)
+
+    Conflict between rule 28 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 28 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 28 and token MULTIPLY resolved as shift (PLUS < MULTIPLY).
+    Conflict between rule 28 and token DIVIDE resolved as shift (PLUS < DIVIDE).
+    Conflict between rule 28 and token POWER resolved as shift (PLUS < POWER).
+
+
+State 60
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   29     | term MINUS term .  [IDENTIFIER, PLUS, MINUS, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 29 (term)
+
+    Conflict between rule 29 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 29 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 29 and token MULTIPLY resolved as shift (MINUS < MULTIPLY).
+    Conflict between rule 29 and token DIVIDE resolved as shift (MINUS < DIVIDE).
+    Conflict between rule 29 and token POWER resolved as shift (MINUS < POWER).
+
+
+State 61
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   30     | term MULTIPLY term .  [IDENTIFIER, PLUS, MINUS, MULTIPLY, DIVIDE, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    POWER  shift, and go to state 38
+
+    $default  reduce using rule 30 (term)
+
+    Conflict between rule 30 and token PLUS resolved as reduce (PLUS < MULTIPLY).
+    Conflict between rule 30 and token MINUS resolved as reduce (MINUS < MULTIPLY).
+    Conflict between rule 30 and token MULTIPLY resolved as reduce (%left MULTIPLY).
+    Conflict between rule 30 and token DIVIDE resolved as reduce (%left DIVIDE).
+    Conflict between rule 30 and token POWER resolved as shift (MULTIPLY < POWER).
+
+
+State 62
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   31     | term DIVIDE term .  [IDENTIFIER, PLUS, MINUS, MULTIPLY, DIVIDE, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+   32     | term . POWER term
+
+    POWER  shift, and go to state 38
+
+    $default  reduce using rule 31 (term)
+
+    Conflict between rule 31 and token PLUS resolved as reduce (PLUS < DIVIDE).
+    Conflict between rule 31 and token MINUS resolved as reduce (MINUS < DIVIDE).
+    Conflict between rule 31 and token MULTIPLY resolved as reduce (%left MULTIPLY).
+    Conflict between rule 31 and token DIVIDE resolved as reduce (%left DIVIDE).
+    Conflict between rule 31 and token POWER resolved as shift (DIVIDE < POWER).
+
+
+State 63
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   32     | term POWER term .  [IDENTIFIER, PLUS, MINUS, MULTIPLY, DIVIDE, INEQUALITY, EQUALS, RPAREN, SEMICOLON, COMMA, RIGHTBRACKET, AND, OR, IF]
+
+    POWER  shift, and go to state 38
+
+    $default  reduce using rule 32 (term)
+
+    Conflict between rule 32 and token PLUS resolved as reduce (PLUS < POWER).
+    Conflict between rule 32 and token MINUS resolved as reduce (MINUS < POWER).
+    Conflict between rule 32 and token MULTIPLY resolved as reduce (MULTIPLY < POWER).
+    Conflict between rule 32 and token DIVIDE resolved as reduce (DIVIDE < POWER).
+    Conflict between rule 32 and token POWER resolved as shift (%right POWER).
+
+
+State 64
+
+   22 comparison: term INEQUALITY term .  [IDENTIFIER, RPAREN, AND, OR, IF]
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 22 (comparison)
+
+
+State 65
+
+   23 comparison: term EQUALS term .  [IDENTIFIER, RPAREN, AND, OR, IF]
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 23 (comparison)
+
+
+State 66
+
+   38 matrix3D: LEFTBRACKET matrixlist RIGHTBRACKET .
+
+    $default  reduce using rule 38 (matrix3D)
+
+
+State 67
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   39 matrixlist: rowlist SEMICOLON . EMPTYLINE rowlist
+   40           | rowlist SEMICOLON . EMPTYLINE matrixlist
+   42 rowlist: rowlist SEMICOLON . row
+   43 row: . term
+   44    | . row COMMA term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+    EMPTYLINE   shift, and go to state 77
+
+    term  go to state 42
+    row   go to state 78
+
+
+State 68
+
+   37 matrix: LEFTBRACKET rowlist RIGHTBRACKET .
+
+    $default  reduce using rule 37 (matrix)
+
+
+State 69
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   44 row: row COMMA . term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 79
+
+
+State 70
+
+   25 term: IDENTIFIER LPAREN argumentlist RPAREN .
+
+    $default  reduce using rule 25 (term)
+
+
+State 71
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   36 argumentlist: argumentlist COMMA . term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term  go to state 80
+
+
+State 72
+
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   12 elselist: ELSEIF logicalformula . matlabprogram
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+   19 logicalformula: logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+
+    IDENTIFIER  shift, and go to state 1
+    AND         shift, and go to state 31
+    OR          shift, and go to state 32
+    IF          shift, and go to state 2
+
+    matlabprogram     go to state 81
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 73
+
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+    9            | IF logicalformula matlabprogram ELSE matlabprogram . END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    END         shift, and go to state 82
+    IF          shift, and go to state 2
+
+    conditional       go to state 18
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 74
+
+   13 elselist: elselist ELSEIF . logicalformula matlabprogram
+   17 logicalformula: . comparison
+   18               | . LPAREN logicalformula RPAREN
+   19               | . logicalformula AND logicalformula
+   20               | . logicalformula OR logicalformula
+   21               | . NOT logicalformula
+   22 comparison: . term INEQUALITY term
+   23           | . term EQUALS term
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 12
+    NOT         shift, and go to state 13
+
+    logicalformula  go to state 83
+    comparison      go to state 15
+    term            go to state 16
+
+
+State 75
+
+   10 conditional: IF logicalformula matlabprogram elselist END .
+
+    $default  reduce using rule 10 (conditional)
+
+
+State 76
+
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   11            | IF logicalformula matlabprogram elselist ELSE . matlabprogram END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    matlabprogram     go to state 84
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 77
+
+   24 term: . NUMBER
+   25     | . IDENTIFIER LPAREN argumentlist RPAREN
+   26     | . IDENTIFIER
+   27     | . LPAREN term RPAREN
+   28     | . term PLUS term
+   29     | . term MINUS term
+   30     | . term MULTIPLY term
+   31     | . term DIVIDE term
+   32     | . term POWER term
+   33     | . MINUS term
+   39 matrixlist: . rowlist SEMICOLON EMPTYLINE rowlist
+   39           | rowlist SEMICOLON EMPTYLINE . rowlist
+   40           | . rowlist SEMICOLON EMPTYLINE matrixlist
+   40           | rowlist SEMICOLON EMPTYLINE . matrixlist
+   41 rowlist: . row
+   42        | . rowlist SEMICOLON row
+   43 row: . term
+   44    | . row COMMA term
+
+    NUMBER      shift, and go to state 9
+    IDENTIFIER  shift, and go to state 10
+    MINUS       shift, and go to state 11
+    LPAREN      shift, and go to state 21
+
+    term        go to state 42
+    matrixlist  go to state 85
+    rowlist     go to state 86
+    row         go to state 45
+
+
+State 78
+
+   42 rowlist: rowlist SEMICOLON row .  [SEMICOLON, RIGHTBRACKET]
+   44 row: row . COMMA term
+
+    COMMA  shift, and go to state 69
+
+    $default  reduce using rule 42 (rowlist)
+
+
+State 79
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   44 row: row COMMA term .  [SEMICOLON, COMMA, RIGHTBRACKET]
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 44 (row)
+
+
+State 80
+
+   28 term: term . PLUS term
+   29     | term . MINUS term
+   30     | term . MULTIPLY term
+   31     | term . DIVIDE term
+   32     | term . POWER term
+   36 argumentlist: argumentlist COMMA term .  [RPAREN, COMMA]
+
+    PLUS      shift, and go to state 34
+    MINUS     shift, and go to state 35
+    MULTIPLY  shift, and go to state 36
+    DIVIDE    shift, and go to state 37
+    POWER     shift, and go to state 38
+
+    $default  reduce using rule 36 (argumentlist)
+
+
+State 81
+
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   12 elselist: ELSEIF logicalformula matlabprogram .  [ELSEIF, END, ELSE]
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    $default  reduce using rule 12 (elselist)
+
+    conditional       go to state 18
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 82
+
+    9 conditional: IF logicalformula matlabprogram ELSE matlabprogram END .
+
+    $default  reduce using rule 9 (conditional)
+
+
+State 83
+
+    2 matlabprogram: . assignment
+    3              | . conditional
+    4              | . matrixassignment
+    5              | . matlabprogram assignment
+    6              | . matlabprogram conditional
+    7              | . matlabprogram matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   13 elselist: elselist ELSEIF logicalformula . matlabprogram
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+   19 logicalformula: logicalformula . AND logicalformula
+   20               | logicalformula . OR logicalformula
+
+    IDENTIFIER  shift, and go to state 1
+    AND         shift, and go to state 31
+    OR          shift, and go to state 32
+    IF          shift, and go to state 2
+
+    matlabprogram     go to state 87
+    conditional       go to state 5
+    matrixassignment  go to state 6
+    assignment        go to state 7
+
+
+State 84
+
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   11            | IF logicalformula matlabprogram elselist ELSE matlabprogram . END
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    END         shift, and go to state 88
+    IF          shift, and go to state 2
+
+    conditional       go to state 18
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 85
+
+   40 matrixlist: rowlist SEMICOLON EMPTYLINE matrixlist .
+
+    $default  reduce using rule 40 (matrixlist)
+
+
+State 86
+
+   39 matrixlist: rowlist . SEMICOLON EMPTYLINE rowlist
+   39           | rowlist SEMICOLON EMPTYLINE rowlist .  [RIGHTBRACKET]
+   40           | rowlist . SEMICOLON EMPTYLINE matrixlist
+   42 rowlist: rowlist . SEMICOLON row
+
+    SEMICOLON  shift, and go to state 67
+
+    $default  reduce using rule 39 (matrixlist)
+
+
+State 87
+
+    5 matlabprogram: matlabprogram . assignment
+    6              | matlabprogram . conditional
+    7              | matlabprogram . matrixassignment
+    8 conditional: . IF logicalformula matlabprogram END
+    9            | . IF logicalformula matlabprogram ELSE matlabprogram END
+   10            | . IF logicalformula matlabprogram elselist END
+   11            | . IF logicalformula matlabprogram elselist ELSE matlabprogram END
+   13 elselist: elselist ELSEIF logicalformula matlabprogram .  [ELSEIF, END, ELSE]
+   14 matrixassignment: . IDENTIFIER ASSIGN matrix3D SEMICOLON
+   15                 | . IDENTIFIER ASSIGN matrix SEMICOLON
+   16 assignment: . IDENTIFIER ASSIGN term SEMICOLON
+
+    IDENTIFIER  shift, and go to state 1
+    IF          shift, and go to state 2
+
+    $default  reduce using rule 13 (elselist)
+
+    conditional       go to state 18
+    matrixassignment  go to state 19
+    assignment        go to state 20
+
+
+State 88
+
+   11 conditional: IF logicalformula matlabprogram elselist ELSE matlabprogram END .
+
+    $default  reduce using rule 11 (conditional)
