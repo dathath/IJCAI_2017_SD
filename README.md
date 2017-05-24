@@ -32,8 +32,12 @@ and bounds on the solution space, ctr: followed by the constraints.
 Setup & Usage:
 ------
 -Clone the repository to a local directory once you have all the dependencies.
--Import proteus into an IDE (eg. eclipse) and edit dRealInterface.java from dl.logicsolvers.drealkit as follows:
-Replace "/home/sumanth/timeout3-v2" with "<path>/timeout3-v2" where <path> is the path to the binary 
+
+-Import proteus into an IDE (eg. eclipse) and edit dRealInterface.java 
+from dl.logicsolvers.drealkit as follows:
+
+Replace "/home/sumanth/timeout3-v2" with "<path>/timeout3-v2" 
+where <path> is the path to the binary 
 corresponding to timeout3-v2.
 
 -Running the FPGA encoder expression benchmarks
